@@ -56,3 +56,12 @@ pipeline:
                       go get gotest.tools/gotestsum
                       CGO_ENABLED=0 GOARCH=amd64 go build -a -tags netgo
                       exit 0
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDocker
+                  identifier: BuildAndPushDocker
+                  spec:
+                    connectorRef: <+input>
+                    repo: <+input>
+                    tags:
+                      - latest
