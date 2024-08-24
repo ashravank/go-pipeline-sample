@@ -1,0 +1,37 @@
+inputSet:
+  pipeline:
+    identifier: gopipeline_unit_build
+    properties:
+      ci:
+        codebase:
+          build:
+            spec:
+              branch: main
+            type: branch
+    stages:
+      - stage:
+          identifier: Unit_test
+          type: CI
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: run_unit_test
+                    type: Run
+                    spec:
+                      connectorRef: account.harnessImage
+                - step:
+                    identifier: Build_app
+                    type: Run
+                    spec:
+                      connectorRef: account.harnessImage
+                - step:
+                    identifier: BuildAndPushDocker
+                    type: BuildAndPushDockerRegistry
+                    spec:
+                      connectorRef: account.harnessImage
+                      repo: shravankumara/pipelie-test
+  name: Input set -1
+  identifier: Input_set_1
+  orgIdentifier: default
+  projectIdentifier: default_project
